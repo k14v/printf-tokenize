@@ -1,6 +1,6 @@
 {
   "name": "@k14v/printf-tokenize",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "printf format string tokenize",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,10 @@
     "url": "git@github.com:k14v/npolator.git"
   },
   "keywords": [
-    "i18n",
-    "l10n"
+    "printf",
+    "tokenize",
+    "token",
+    "lexer"
   ],
   "author": "",
   "license": "MIT",
