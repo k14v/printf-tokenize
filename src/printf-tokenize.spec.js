@@ -71,9 +71,8 @@ Object.entries({
     createSpecifierToken('s')(0, '%s'),
     createLiteralToken(2, ' '),
   ],
-})
-  .forEach((spec) => {
-    test(`should tokenize the input "${spec[0]}"`, (t) => validateTokens(t, spec[0], spec[1]));
-  });
+}).forEach((spec) => {
+  test(`should tokenize the input "${spec[0]}"`, (t) => validateTokens(t, spec[0], spec[1]));
+});
 
 test.todo('should works with multiline format');
