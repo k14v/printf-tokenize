@@ -2,18 +2,19 @@ import test from 'ava';
 import printfTokenize from '../src/printf-tokenize';
 import {
   createLiteralToken,
-  createSpecifierToken
-} from './helpers'
+  createSpecifierToken,
+} from './helpers';
+
 
 const checkValueAndLength = (str, expectedTokens) => expectedTokens.filter(token => {
-    const value = str.substring(token.start, token.end);
-    return value === token.value && value.length === token.length
-  }).length === expectedTokens.length;
+  const value = str.substring(token.start, token.end);
+  return value === token.value && value.length === token.length;
+}).length === expectedTokens.length;
 
 const validateTokens = (t, input, expectedTokens) => {
   t.deepEqual(printfTokenize(input), expectedTokens);
   t.true(checkValueAndLength(input, expectedTokens));
-}
+};
 
 Object.entries({
   'Characters: %c %c ': [
@@ -21,7 +22,7 @@ Object.entries({
     createSpecifierToken('c')(12, '%c'),
     createLiteralToken(14, ' '),
     createSpecifierToken('c')(15, '%c'),
-    createLiteralToken(17, ' ')
+    createLiteralToken(17, ' '),
   ],
   'Decimals: %d %ld': [
     createLiteralToken(0, 'Decimals: '),
@@ -69,9 +70,8 @@ Object.entries({
   '%s ': [
     createSpecifierToken('s')(0, '%s'),
     createLiteralToken(2, ' '),
-  ]
-})
-.forEach((spec) => {
+  ],
+}).forEach((spec) => {
   test(`should tokenize the input "${spec[0]}"`, (t) => validateTokens(t, spec[0], spec[1]));
 });
 

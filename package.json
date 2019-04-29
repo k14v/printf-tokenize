@@ -1,6 +1,6 @@
 {
   "name": "@k14v/printf-tokenize",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "printf format string tokenize",
   "main": "index.js",
   "scripts": {
@@ -9,9 +9,8 @@
     "build": "babel src --out-dir=lib --ignore=**/*.spec.js",
     "watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build && npm run lint && npm run test",
-    "lint": "eslint src examples",
-    "lint:fix": "eslint src examples --fix",
-    "example": "npm run build && babel-node examples/resolver.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "coverage": "codecov",
     "release": "release-it -n"
   },
@@ -23,11 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:k14v/npolator.git"
+    "url": "git@github.com:k14v/printf-tokenize.git"
   },
   "keywords": [
-    "i18n",
-    "l10n"
+    "printf",
+    "tokenize",
+    "token",
+    "lexer"
   ],
   "author": "",
   "license": "MIT",
