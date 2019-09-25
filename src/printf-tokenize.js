@@ -4,7 +4,7 @@ import {
 } from './helpers';
 
 // credits https://github.com/SheetJS/printj/blob/master/lib/loop_code.mjs
-export default (fmt) => {
+const printfTokenize = (fmt) => {
   var out = [];
   var start = 0;
 
@@ -14,25 +14,22 @@ export default (fmt) => {
 
 
   var fmtflags = '';
-
-
   var fmtwidth = '';
-
-
   var fmtprec = '';
-
-
   var fmtlen = '';
-
   var c = 0;
-
   var L = fmt.length;
 
   for (; i < L; ++i) {
     c = fmt.charCodeAt(i);
     if (!infmt) {
-      if (c !== 37) continue;
-
+      if (c !== 37 || (
+        // Escape percent using %%
+        c === 37 && (
+          fmt.charCodeAt(i - 1) === 37 ||
+          fmt.charCodeAt(i + 1) === 37
+        )
+      )) continue;
       if (start < i) out.push(createLiteralToken(start, fmt.substring(start, i)));
       start = i;
       infmt = true;
@@ -171,3 +168,5 @@ export default (fmt) => {
   };
   return out;
 };
+
+export default printfTokenize;
