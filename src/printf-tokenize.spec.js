@@ -30,6 +30,11 @@ Object.entries({
     createLiteralToken(12, ' '),
     createSpecifierToken('d')(13, '%ld', null, null, null, null, 'l'),
   ],
+  'Decimals: with a scaped format %d%% due percent': [
+    createLiteralToken(0, 'Decimals: with a scaped format '),
+    createSpecifierToken('d')(31, '%d'),
+    createLiteralToken(33, '%% due percent'),
+  ],
   'Preceding with blanks: %10d ': [
     createLiteralToken(0, 'Preceding with blanks: '),
     createSpecifierToken('d')(23, '%10d', null, null, '10'),
