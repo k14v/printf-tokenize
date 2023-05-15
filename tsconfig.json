@@ -1,10 +1,14 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
-  "exclude": ["node_modules", "**/*.spec.ts", "lib"],
+  "exclude": ["node_modules", "lib"],
   "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "outDir": "lib",
     "rootDir": "src",
     "declaration": true,
-    "strict": true
+    "strict": true,
+    "module": "ES2020",
+    "moduleResolution": "node"
   }
 }

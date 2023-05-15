@@ -2,9 +2,9 @@
 import {
   createLiteralToken,
   createSpecifierToken,
-} from './helpers';
+} from './helpers.ts';
 // Types
-import { TokenSpecifier } from './constants';
+import { TokenSpecifier } from './constants.ts';
 
 
 // credits https://github.com/SheetJS/printj/blob/master/lib/loop_code.mjs

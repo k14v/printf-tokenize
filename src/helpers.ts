@@ -3,7 +3,7 @@ import {
   TokenVariant,
   TokenSpecifier,
   TokenType,
-} from './constants';
+} from './constants.ts';
 // Types
 import type { Token } from './index';
 
@@ -20,24 +20,29 @@ export function createToken (
   value: string,
   extra?: Partial<Token>
 ): Token {
+  let length = value.length;
+  if(extra && extra.length !== undefined) {
+    length = extra.length;
+  }
   return {
     kind,
     value,
     start,
     end: start + value.length,
     ...extra,
-  } as Token;
+    length,
+  };
 }
 
 export function createParameterToken (type: TokenType, extra?: Partial<Token>) {
   return (specifier: TokenSpecifier) => (
     start: number,
     value: string,
-    param: string,
-    flags: string,
-    width: string,
-    precision: string,
-    fLength: string,
+    param?: string,
+    flags?: string,
+    width?: string,
+    precision?: string,
+    fLength?: string,
   ) => createToken(
     TokenKind.Parameter,
     start,
