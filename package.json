@@ -3,6 +3,7 @@
   "version": "0.0.4",
   "description": "printf format string tokenize",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "nyc --reporter=lcov --reporter=html --reporter=text ava",
     "test:watch": "ava --watch",
