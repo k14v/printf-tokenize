@@ -1,24 +1,30 @@
+// Utils
 import {
   createLiteralToken,
   createSpecifierToken,
 } from './helpers';
+// Types
+import { TokenSpecifier } from './constants';
+
 
 // credits https://github.com/SheetJS/printj/blob/master/lib/loop_code.mjs
-const printfTokenize = (fmt) => {
-  var out = [];
-  var start = 0;
+function printfTokenize (fmt: string) {
+  const out = [];
+  let start = 0;
 
-  var i = 0;
-  var infmt = false;
-  var fmtparam = '';
+  let i = 0;
+  let infmt = false;
+  let fmtparam = '';
 
 
-  var fmtflags = '';
-  var fmtwidth = '';
-  var fmtprec = '';
-  var fmtlen = '';
-  var c = 0;
-  var L = fmt.length;
+  let fmtflags = '';
+  let fmtwidth = '';
+  let fmtprec = '';
+  let fmtlen = '';
+  let c = 0;
+  const L = fmt.length;
+  let specifier;
+  let createToken;
 
   for (; i < L; ++i) {
     c = fmt.charCodeAt(i);
@@ -150,8 +156,8 @@ const printfTokenize = (fmt) => {
             fmtprec = fmtprec.substr(1);
           };
 
-          const specifier = String.fromCharCode(c);
-          const createToken = createSpecifierToken(specifier);
+          specifier = String.fromCharCode(c);
+          createToken = createSpecifierToken(specifier as TokenSpecifier);
 
           out.push(createToken(start, fmt.substring(start, i + 1), fmtparam, fmtflags, fmtwidth, fmtprec, fmtlen));
           start = i + 1;
