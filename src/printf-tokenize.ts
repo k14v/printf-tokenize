@@ -86,7 +86,7 @@ function printfTokenize (fmt: string) {
             fmtprec += '*';
           } else {
             fmtwidth += '*';
-          };
+          }
           break;
 
         /* length */
@@ -94,7 +94,7 @@ function printfTokenize (fmt: string) {
         case 108:
           if (fmtlen.length > 1) {
             throw new Error('bad length ' + fmtlen + String(c));
-          };
+          }
           fmtlen += String.fromCharCode(c);
           break;
 
@@ -107,14 +107,14 @@ function printfTokenize (fmt: string) {
         case 119:
           if (fmtlen !== '') {
             throw new Error('bad length ' + fmtlen + String.fromCharCode(c));
-          };
+          }
           fmtlen = String.fromCharCode(c);
           break;
 
         case 73:
           if (fmtlen !== '') {
             throw new Error('bad length ' + fmtlen + 'I');
-          };
+          }
           fmtlen = 'I';
           break;
 
@@ -154,7 +154,7 @@ function printfTokenize (fmt: string) {
           infmt = false;
           if (fmtprec.length > 1) {
             fmtprec = fmtprec.substr(1);
-          };
+          }
 
           specifier = String.fromCharCode(c);
           createToken = createSpecifierToken(specifier as TokenSpecifier);
@@ -171,8 +171,8 @@ function printfTokenize (fmt: string) {
 
   if (start < fmt.length) {
     out.push(createLiteralToken(start, fmt.substring(start)));
-  };
+  }
   return out;
-};
+}
 
 export default printfTokenize;
