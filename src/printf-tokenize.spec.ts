@@ -7,8 +7,8 @@ import {
   createSpecifierToken,
 } from './helpers.ts';
 // Types
-import { TokenSpecifier } from './constants.ts'
-import { Token } from './index';
+import { TokenSpecifier } from './constants.ts';
+import { Token } from './types';
 
 
 const checkValueAndLength = (str: string, expectedTokens: Array<Token>) => expectedTokens.filter(token => {

@@ -8,7 +8,7 @@ export interface Token {
   start: number,
   end: number,
   length: number,
-  type?: TotenType,
+  type?: TokenType,
   specifier?: TokenSpecifier,
   param?: string,
   flags?: string,

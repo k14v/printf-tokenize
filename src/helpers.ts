@@ -5,13 +5,13 @@ import {
   TokenType,
 } from './constants.ts';
 // Types
-import type { Token } from './index';
+import type { Token } from './types';
 
 
 export function filterToken (props: Partial<Token>): Partial<Token> {
   return Object.entries(props)
     .filter(entry => Boolean(entry[1]))
-    .reduce((prev: Partial<Token>, entry) => ({...prev, [entry[0]]: entry[1]}), {} as Partial<Token>)
+    .reduce((prev: Partial<Token>, entry) => ({...prev, [entry[0]]: entry[1]}), {} as Partial<Token>);
 }
 
 export function createToken (
@@ -66,11 +66,11 @@ export function createLiteralToken (start: number, value: string, extra?: Partia
     start,
     value,
     extra
-  )
+  );
 }
 
 export function createNumberToken (variant: TokenVariant, extra?: Partial<Token>) {
-  return createParameterToken(TokenType.Number, {variant, ...extra})
+  return createParameterToken(TokenType.Number, {variant, ...extra});
 }
 
 export const SPECIFIERS_TOKEN_MAP = {
@@ -91,5 +91,5 @@ export function createSpecifierToken (specifier: TokenSpecifier) {
   if(typeof createToken !== 'function') {
     throw new Error(`Invalid specifier: "${specifier}"`);
   }
-  return createToken(specifier)
+  return createToken(specifier);
 }
