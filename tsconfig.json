@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
-  "exclude": ["node_modules", "lib"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "noEmit": true,
     "allowImportingTsExtensions": true,
