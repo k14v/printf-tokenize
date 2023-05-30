@@ -38,11 +38,6 @@
   ],
   "author": "",
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
   "files": ["dist"],
   "ava": {
     "files": [
