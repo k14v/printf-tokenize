@@ -1,24 +1,30 @@
+// Utils
 import {
   createLiteralToken,
   createSpecifierToken,
-} from './helpers';
+} from './helpers.ts';
+// Types
+import { TokenSpecifier } from './constants.ts';
+
 
 // credits https://github.com/SheetJS/printj/blob/master/lib/loop_code.mjs
-const printfTokenize = (fmt) => {
-  var out = [];
-  var start = 0;
+function printfTokenize (fmt: string) {
+  const out = [];
+  let start = 0;
 
-  var i = 0;
-  var infmt = false;
-  var fmtparam = '';
+  let i = 0;
+  let infmt = false;
+  let fmtparam = '';
 
 
-  var fmtflags = '';
-  var fmtwidth = '';
-  var fmtprec = '';
-  var fmtlen = '';
-  var c = 0;
-  var L = fmt.length;
+  let fmtflags = '';
+  let fmtwidth = '';
+  let fmtprec = '';
+  let fmtlen = '';
+  let c = 0;
+  const L = fmt.length;
+  let specifier;
+  let createToken;
 
   for (; i < L; ++i) {
     c = fmt.charCodeAt(i);
@@ -80,7 +86,7 @@ const printfTokenize = (fmt) => {
             fmtprec += '*';
           } else {
             fmtwidth += '*';
-          };
+          }
           break;
 
         /* length */
@@ -88,7 +94,7 @@ const printfTokenize = (fmt) => {
         case 108:
           if (fmtlen.length > 1) {
             throw new Error('bad length ' + fmtlen + String(c));
-          };
+          }
           fmtlen += String.fromCharCode(c);
           break;
 
@@ -101,14 +107,14 @@ const printfTokenize = (fmt) => {
         case 119:
           if (fmtlen !== '') {
             throw new Error('bad length ' + fmtlen + String.fromCharCode(c));
-          };
+          }
           fmtlen = String.fromCharCode(c);
           break;
 
         case 73:
           if (fmtlen !== '') {
             throw new Error('bad length ' + fmtlen + 'I');
-          };
+          }
           fmtlen = 'I';
           break;
 
@@ -148,10 +154,10 @@ const printfTokenize = (fmt) => {
           infmt = false;
           if (fmtprec.length > 1) {
             fmtprec = fmtprec.substr(1);
-          };
+          }
 
-          const specifier = String.fromCharCode(c);
-          const createToken = createSpecifierToken(specifier);
+          specifier = String.fromCharCode(c);
+          createToken = createSpecifierToken(specifier as TokenSpecifier);
 
           out.push(createToken(start, fmt.substring(start, i + 1), fmtparam, fmtflags, fmtwidth, fmtprec, fmtlen));
           start = i + 1;
@@ -165,8 +171,8 @@ const printfTokenize = (fmt) => {
 
   if (start < fmt.length) {
     out.push(createLiteralToken(start, fmt.substring(start)));
-  };
+  }
   return out;
-};
+}
 
 export default printfTokenize;
