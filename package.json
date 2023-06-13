@@ -1,6 +1,6 @@
 {
   "name": "@k14v/printf-tokenize",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "printf format string tokenize",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
