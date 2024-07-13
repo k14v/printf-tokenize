@@ -14,14 +14,44 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Lint
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install and Lint
+        uses: actions/cache@v4
+        with:
+          path: "node_modules"
+          key: ${{ runner.arch }}-${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
       - run: |
-          npm run lint
+          yarn install --frozen-lockfile
+          yarn lint
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install and Test
+        uses: actions/cache@v4
+        with:
+          path: "node_modules"
+          key: ${{ runner.arch }}-${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
       - run: |
-          npm test
+          yarn install --frozen-lockfile
+          yarn test
+  # publish-npm:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     id-token: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
+  #         registry-url: 'https://registry.npmjs.org'
+  #     - run: npm publish --provenance --access public
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
