@@ -18,7 +18,7 @@ const checkValueAndLength = (str: string, expectedTokens: Array<Token>) => expec
 
 const validateTokens = (
   input: string,
-  expectedTokens: Array<Token>
+  expectedTokens: Array<Token>,
 ) => {
   expect(printfTokenize(input)).toMatchObject(expectedTokens);
   expect(checkValueAndLength(input, expectedTokens)).toBe(true);

@@ -18,7 +18,7 @@ export function createToken (
   kind: TokenKind,
   start: number,
   value: string,
-  extra?: Partial<Token>
+  extra?: Partial<Token>,
 ): Token {
   let length = value.length;
   if(extra && extra.length !== undefined) {
@@ -56,7 +56,7 @@ export function createParameterToken (type: TokenType, extra?: Partial<Token>) {
       precision,
       fLength,
       ...extra,
-    })
+    }),
   );
 }
 
@@ -65,7 +65,7 @@ export function createLiteralToken (start: number, value: string, extra?: Partia
     TokenKind.Literal,
     start,
     value,
-    extra
+    extra,
   );
 }
 
