@@ -31,5 +31,9 @@
       }
     ],
     "no-multiple-empty-lines": "off"
-  }
+  },
+  "ignorePatterns": [
+    "dist/*",
+    "lib/*"
+  ]
 }
