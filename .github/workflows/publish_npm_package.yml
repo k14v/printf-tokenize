@@ -1,10 +1,9 @@
 name: Publish Library
 run-name: Publish to NPM Registry
-on: [push]
-  # push:
-    # branches:
-    #   - master
-    #   - develop
+on:
+  push:
+    branches:
+      - master
 jobs:
   Info-And-Checkout:
     runs-on: ubuntu-latest
