@@ -1,5 +1,5 @@
 // Core
-import test, { ExecutionContext } from 'ava';
+import { test, expect } from 'vitest';
 // Utils
 import printfTokenize from './printf-tokenize.ts';
 import {
@@ -17,12 +17,11 @@ const checkValueAndLength = (str: string, expectedTokens: Array<Token>) => expec
 }).length === expectedTokens.length;
 
 const validateTokens = (
-  t: ExecutionContext,
   input: string,
-  expectedTokens: Array<Token>
+  expectedTokens: Array<Token>,
 ) => {
-  t.deepEqual(printfTokenize(input), expectedTokens);
-  t.true(checkValueAndLength(input, expectedTokens));
+  expect(printfTokenize(input)).toMatchObject(expectedTokens);
+  expect(checkValueAndLength(input, expectedTokens)).toBe(true);
 };
 
 Object.entries({
@@ -86,7 +85,7 @@ Object.entries({
     createLiteralToken(2, ' '),
   ],
 }).forEach((spec) => {
-  test(`should tokenize the input "${spec[0]}"`, (t) => validateTokens(t, spec[0], spec[1]));
+  test(`should tokenize the input "${spec[0]}"`, () => validateTokens(spec[0], spec[1]));
 });
 
 
