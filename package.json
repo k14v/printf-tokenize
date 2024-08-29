@@ -1,17 +1,23 @@
 {
   "name": "@k14v/printf-tokenize",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "printf format string tokenize",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "type": "module",
   "scripts": {
-    "test": "nyc --reporter=lcov --reporter=html --reporter=text ava",
-    "test:watch": "ava --watch",
-    "build": "babel src --out-dir=lib --ignore=**/*.spec.js",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "coverage": "vitest run --coverage",
+    "build": "tsup src/index.ts --dts --format cjs,esm",
     "watch": "npm run build -- --watch",
-    "prepublishOnly": "npm run build && npm run lint && npm run test",
+    "prepublishOnly": "npm run build",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "coverage": "codecov",
     "release": "release-it -n"
   },
   "husky": {
@@ -32,46 +38,24 @@
   ],
   "author": "",
   "license": "MIT",
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
-  "ava": {
-    "files": [
-      "src/**/*.spec.js"
-    ],
-    "require": [
-      "@babel/register",
-      "@babel/polyfill"
-    ]
-  },
-  "nyc": {
-    "exclude": [
-      "src/*.spec.js"
-    ]
-  },
-  "dependencies": {},
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/node": "^7.0.0",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
-    "@babel/register": "^7.0.0",
-    "ava": "^1.0.0-rc.1",
-    "babel-eslint": "^10.0.1",
-    "codecov": "^3.1.0",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.9.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
+    "@eslint/compat": "^1.1.1",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.7.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "@vitest/coverage-v8": "^2.0.2",
+    "eslint": "^9.7.0",
+    "eslint-plugin-import": "^2.29.1",
+    "globals": "^15.8.0",
     "husky": "^1.1.4",
-    "nyc": "^13.0.1",
-    "release-it": "^8.0.1",
-    "sinon": "^7.1.1"
+    "release-it": "^17.5.0",
+    "ts-node": "^10.9.1",
+    "tsup": "^8.1.0",
+    "typescript": "^5.0.4",
+    "vitest": "^2.0.2"
   }
 }
