@@ -1,0 +1,41 @@
+name: Publish Release
+run-name: Publish to NPM registry, upgrade version (package.json and git tag), update changelog and create Github Release
+on:
+  push:
+    branches:
+      - feature/14-automatize-the-publish-of-versions # REPLACE BY master after checking
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v4
+        with:
+          path: 'node_modules'
+          key: ${{ runner.arch }}-${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+  Publish-npm:
+    needs: [Test]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v4
+        with:
+          path: 'node_modules'
+          key: ${{ runner.arch }}-${{ runner.os }}-modules-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_K14V_PUBLISH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
