@@ -1,0 +1,53 @@
+{
+  "branches": [
+    {
+      "name": "feature/14-automatize-the-publish-of-versions"
+    },
+    {
+      "name": "next",
+      "channel": "alpha",
+      "prerelease": "alpha"
+    }
+  ],
+  "tagFormat": "v${version}",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    "@semantic-release/github",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "spz-publish version ${nextRelease.version}",
+        "publishCmd": "spz-publish upload"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "packages/*/package.json",
+          "package.json",
+          "yarn-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): bump version ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
