@@ -1,7 +1,7 @@
 {
   "branches": [
     {
-      "name": "feature/14-automatize-the-publish-of-versions"
+      "name": "master"
     },
     {
       "name": "next",
