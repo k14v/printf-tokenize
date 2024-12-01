@@ -3,7 +3,7 @@ run-name: Publish to NPM registry, upgrade version (package.json and git tag), u
 on:
   push:
     branches:
-      - feature/14-automatize-the-publish-of-versions # REPLACE BY master after checking
+      - master
 jobs:
   Test:
     runs-on: ubuntu-latest
