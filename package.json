@@ -70,6 +70,9 @@
     "typescript": "^5.0.4",
     "vitest": "^2.0.2"
   },
+  "resolutions": {
+    "conventional-changelog-conventionalcommits": ">= 8.0.0"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog",
